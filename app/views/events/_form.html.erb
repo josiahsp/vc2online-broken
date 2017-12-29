@@ -1,0 +1,125 @@
+<%= form_for(event) do |f| %>
+  <% if event.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(event.errors.count, "error") %> prohibited this event from being saved:</h2>
+
+      <ul>
+      <% event.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= f.label :subtitle %>
+    <%= f.text_field :subtitle %>
+  </div>
+
+  <div class="field">
+    <%= f.label :synopsis %>
+    <%= f.text_area :synopsis %>
+  </div>
+
+  <div class="field">
+    <%= f.label :content %>
+    <%= f.text_area :content %>
+  </div>
+
+  <div class="field">
+    <%= f.label :location %>
+    <%= f.select :location_id, $locations.collect { |campus| [campus.title, campus.id] },
+                                selected: event.location_id,
+                                include_blank: true %>
+    <br />- OR -<br />
+    <%= f.label :location_building %>
+    <%= f.text_field :location_building %>
+
+    <div class="field">
+      <%= f.label :location_address %>
+      <%= f.text_field :location_address %>
+    </div>
+
+    <div class="field">
+      <%= f.label :location_address2 %>
+      <%= f.text_field :location_address2 %>
+    </div>
+
+    <div class="field">
+      <%= f.label :location_city %>
+      <%= f.text_field :location_city %>
+    </div>
+
+    <div class="field">
+      <%= f.label :location_state %>
+      <%= f.text_field :location_state %>
+    </div>
+
+    <div class="field">
+      <%= f.label :location_zip %>
+      <%= f.text_field :location_zip %>
+    </div>
+
+    <div class="field">
+      <%= f.label :location_Google_Maps_Place_ID %>
+      <%= f.text_field :location_googlemapsid %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= f.label :start %>
+    <%= f.datetime_select :start, :order => [:month, :day, :year],
+                                  :startyear => Date.today.year,
+                                  :startmonth => Date.today.month,
+                                  :startday => Date.today.day,
+                                  :starthour => Time.now.hour,
+                                  :default => 7.days.from_now,
+                                  :minute_step => 5,
+                                  :ampm => true,
+                                  :use_short_month => true
+                                  %>
+  </div>
+
+  <div class="field">
+    <%= f.label :end, :title => "If no End date/time, make same as Start date/time." %>
+    <%= f.datetime_select :end, :order => [:month, :day, :year],
+                                :startyear => Date.today.year,
+                                :startmonth => Date.today.month,
+                                :startday => Date.today.day,
+                                :starthour => Time.now.hour,
+                                :default => 7.days.from_now + 2.hours,
+                                :minute_step => 5,
+                                :ampm => true,
+                                :use_short_month => true
+                                %>
+  </div>
+
+  <div class="field">
+    <%= f.label :videos %>
+    <%= f.text_field :videos_id, disabled: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :images %>
+    <%= f.text_field :images_id, disabled: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :links %>
+    <%= f.text_field :links_id, disabled: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :price %>
+    $<%= f.text_field :price, placeholder: "15.00" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

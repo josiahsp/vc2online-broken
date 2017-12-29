@@ -1,0 +1,50 @@
+<%= form_for(meeting) do |f| %>
+  <% if meeting.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(meeting.errors.count, "error") %> prohibited this meeting from being saved:</h2>
+
+      <ul>
+      <% meeting.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :location %>
+    <%= f.select :location_id, $locations.collect { |location| [location.title, location.id] }, selected: meeting.location %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :service %>
+    <%= f.select :service_id,  $services.collect { |service| [service.title, service.id] }, selected: meeting.service_id %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :weekday %>
+    <%= f.select :weekday, [['Sunday', 0],
+                           ['Monday', 1],
+                           ['Tuesday', 2],
+                           ['Wednesday', 3],
+                           ['Thursday', 4],
+                           ['Friday', 5],
+                           ['Saturday', 6]] %>
+  </div>
+  
+  <div class="field">
+   <%= f.label :time %>
+   <%= f.time_select :time, { minute_step: 5,
+                              ampm: true } %>
+  </div>
+
+  <div class="field">
+    <%= f.label :level, "Display in Locations Partial?" %>
+    <%= f.radio_button :level, 1 %> Yes<br />
+    <%= f.radio_button :level, 0 %> No
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

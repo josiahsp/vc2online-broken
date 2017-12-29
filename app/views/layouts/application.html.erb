@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Vc2online</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <%= render "application/nav" %>
+    <%= yield %>
+
+    <%= render "application/locations" %>
+        <% if false %>
+    <%= render "application/footer" %>
+    <% end %>
+  </body>
+</html>

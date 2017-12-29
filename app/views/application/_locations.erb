@@ -1,0 +1,28 @@
+<h1>This Weekend</h1>
+<ul>
+  <% $locations.each do |l| %>
+    <div>
+    <h2><%= l.title %></h2>
+    <% if l.building != "" %><%= l.building.titlecase %><br /><% end %>
+      <%= link_to (URI.encode("https://www.google.com/maps/search/?api=1&query=" + l.address + " " + l.address2 + " " + l.city.titlecase + ", " + l.state.upcase + " " + l.zip + "&query_place_id=" + l.googlemapsid)) do %>
+        <%= l.address.titlecase %><br />
+          <% if l.address2 != "" %><%= l.address2 %><br /><% end %>
+          <%= l.city.titlecase + ", " + l.state.upcase + " " + l.zip %><br />
+    <% end %>
+    </div>
+    <div>
+<hr>
+    <%= $sorted_meetings.values %><hr>
+
+      <% $sorted_meetings.each do |service| %>
+      <h3><%= service %></h3>
+        <% services = service %>
+        <% services.each do |meetings| %>
+          <% meeting = meetings %>
+          <%= meeting %>  
+        <% end %>
+      <% end %>
+  
+    </div>
+  <% end %>
+</ul>
