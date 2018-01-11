@@ -33,7 +33,7 @@
 
   <div class="field">
     <%= f.label :location %>
-    <%= f.select :location_id, $locations.collect { |campus| [campus.title, campus.id] },
+    <%= f.select :location_id, @locations.collect { |campus| [campus.title, campus.id] },
                                 selected: event.location_id,
                                 include_blank: true %>
     <br />- OR -<br />
@@ -87,7 +87,7 @@
 
   <div class="field">
     <%= f.label :end, :title => "If no End date/time, make same as Start date/time." %>
-    <%= f.datetime_select :end, :order => [:month, :day, :year],
+    <%= f.datetime_select :endtime, :order => [:month, :day, :year],
                                 :startyear => Date.today.year,
                                 :startmonth => Date.today.month,
                                 :startday => Date.today.day,

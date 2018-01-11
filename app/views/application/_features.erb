@@ -1,0 +1,52 @@
+<ul>
+    <% @top_features.each do |f| %>
+        <% if f.class == Feature && f.event_id.present? && f.page_id.blank? %>
+            <%= link_to event_path(f.event_id) do %>
+                    <h2><%= f.event.title %></h2>
+                    <i><% if f.event.start.day != f.event.endtime.day %>
+                        <%= f.event.start.strftime("%a, %b %d") %> - <%= f.event.endtime.strftime("%a, %b %d") %>
+                    <% else %>
+                        <%= f.event.start.strftime("%a, %b %d at %-l:%M %p") %>
+                    <% end %></i>
+                    <p><%= f.caption.blank? ? f.event.synopsis : f.caption %></p>
+                </div>
+            <% end %>
+        <% elsif f.class == Event %>
+            <%= link_to event_path(f.id) do %>
+                <div>
+                    <h2><%= f.title %></h2>
+                    <i><% if f.start.day != f.endtime.day %>
+                        <%= f.start.strftime("%a, %b %d") %> - <%= f.endtime.strftime("%a, %b %d") %>
+                    <% else %>
+                        <%= f.start.strftime("%a, %b %d at %-l:%M %p") %>
+                    <% end %></i>
+                    <p><%= f.synopsis %></p>
+                </div>
+            <% end %>
+        <% end %>
+    <% end %>
+</ul>
+
+
+<% if false %>
+<% if f.page %>
+    <%= link_to page_path(f.page_id) do %>
+        <div>
+            <% if false %><%= f.page.image_id %><% end %>
+            <h2><%= f.page.title %></h2>
+            <p><%= f.caption %></p>
+        </div>
+    <% end %>
+<% elsif f.event %>
+    
+    
+
+<% elsif f.for_youtube? %>
+    <%= link_to f[:url] do %>
+        <div>
+            <%= img_tag(f[:thumbnail]) %><% end %>
+            <h2><%= f[:title] %></h2>
+            <p><%= f[:caption] %></p>
+        </div>
+    <% end %>
+<% end %>

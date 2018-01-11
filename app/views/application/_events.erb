@@ -1,0 +1,16 @@
+<ul>
+  <% @events.chronological.each do |e| %>
+    <%= link_to event_path(e.id) do %>
+      <div>
+      <% if false %><%= e.image_ids %><% end %>
+      <h2><%= e.title %></h2>
+      <i><% if e.start.day != e.endtime.day %>
+        <%= e.start.strftime("%a, %b %d") %> - <%= e.endtime.strftime("%a, %b %d") %>
+      <% else %>
+        <%= e.start.strftime("%a, %b %d at %-l:%M %p") %>
+      <% end %></i>
+        <p><%= e.synopsis %></p>
+      </div>
+    <% end %>
+  <% end %>
+</ul>

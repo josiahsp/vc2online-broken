@@ -5,8 +5,8 @@ class EventValidator < ActiveModel::Validator
       record.errors[:start] << 'must be in the future'
     end
     
-    if record.start > record.end
-      record.errors[:end] << 'must be after event start date/time'
+    if record.start > record.endtime
+      record.errors[:endtime] << 'must be after event start date/time'
     end
     
     if compare_at_least_one(record)

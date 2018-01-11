@@ -1,6 +1,6 @@
 <h1>This Weekend</h1>
 <ul>
-  <% $locations.each do |l| %>
+  <% @locations.each do |l| %>
     <div>
     <h2><%= l.title %></h2>
     <% if l.building != "" %><%= l.building.titlecase %><br /><% end %>
@@ -11,17 +11,16 @@
     <% end %>
     </div>
     <div>
-<hr>
-    <%= $sorted_meetings.values %><hr>
 
-      <% $sorted_meetings.each do |service| %>
-      <h3><%= service %></h3>
-        <% services = service %>
-        <% services.each do |meetings| %>
-          <% meeting = meetings %>
-          <%= meeting %>  
+
+      <% @sorted_meetings.each do |service| %>
+        <h3><% thisservice = service[0][0] %><%= thisservice.title %></h3>
+        <% thisservicemeetings = service[1] %>
+        <% meetings_grouped_by_weekday(thisservicemeetings).each do |s| %>
+          <%= s %><br />
         <% end %>
       <% end %>
+
   
     </div>
   <% end %>

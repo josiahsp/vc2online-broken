@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171227231727) do
+ActiveRecord::Schema.define(version: 20171230194057) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 20171227231727) do
     t.string   "location_zip"
     t.string   "location_googlemapsid"
     t.datetime "start"
-    t.datetime "end"
+    t.datetime "endtime"
     t.integer  "videos_id"
     t.integer  "images_id"
     t.integer  "links_id"
@@ -40,6 +40,21 @@ ActiveRecord::Schema.define(version: 20171227231727) do
     t.index ["links_id"], name: "index_events_on_links_id", using: :btree
     t.index ["location_id"], name: "index_events_on_location_id", using: :btree
     t.index ["videos_id"], name: "index_events_on_videos_id", using: :btree
+  end
+
+  create_table "features", force: :cascade do |t|
+    t.datetime "endtime"
+    t.integer  "level"
+    t.integer  "event_id"
+    t.integer  "page_id"
+    t.integer  "classification"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.datetime "start"
+    t.boolean  "live"
+    t.text     "caption"
+    t.index ["event_id"], name: "index_features_on_event_id", using: :btree
+    t.index ["page_id"], name: "index_features_on_page_id", using: :btree
   end
 
   create_table "locations", force: :cascade do |t|
@@ -83,5 +98,12 @@ ActiveRecord::Schema.define(version: 20171227231727) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "youtubes", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "features", "events"
+  add_foreign_key "features", "pages"
   add_foreign_key "meetings", "locations"
 end

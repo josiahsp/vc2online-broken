@@ -14,6 +14,11 @@ module Vc2online
     
     config.time_zone = 'Eastern Time (US & Canada)'
     config.active_record.default_timezone = :local # Or :utc
+    config.active_record.time_zone_aware_types = [:datetime, :time]
     config.autoload_paths += %W[#{config.root}/lib/validators/]
+    config.autoload_paths += %W(#{config.root}/lib/methods/)
+    
+    
+    config.logger = ActiveSupport::Logger.new(STDOUT)
   end
 end

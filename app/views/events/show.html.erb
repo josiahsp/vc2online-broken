@@ -17,7 +17,7 @@
 
 <p>
   <strong>Content:</strong>
-  <%= @event.content %>
+  <%= simple_format(@event.content) %>
 </p>
 
 <p>
@@ -65,10 +65,10 @@
 <p>
   <strong>Time:</strong>
   <%= @event.start.strftime("%e %b %Y %H:%M%p") %>
-  <% if @event.start != @event.end && @event.start.day == @event.end.day %>
-  - <%= @event.end.strftime("%H:%M%p") %>
-  <% elsif @event.start != @event.end && @event.start.day != @event.end.day %>
-  - <%= @event.end.strftime("%e %b %Y %H:%M%p") %>
+  <% if @event.start != @event.endtime && @event.start.day == @event.endtime.day %>
+  - <%= @event.endtime.strftime("%H:%M%p") %>
+  <% elsif @event.start != @event.endtime && @event.start.day != @event.endtime.day %>
+  - <%= @event.endtime.strftime("%e %b %Y %H:%M%p") %>
   <% end %>
 </p>
 
